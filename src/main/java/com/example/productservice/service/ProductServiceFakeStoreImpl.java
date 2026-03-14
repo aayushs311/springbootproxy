@@ -1,10 +1,15 @@
 package com.example.productservice.service;
 
 import com.example.productservice.dtos.FakeStoreCreateProductRequestDto;
-import com.example.productservice.dtos.FakeStoreResponseDto;
+import com.example.productservice.dtos.FakeStoreCreateProductResponseDto;
+import com.example.productservice.dtos.FakeStoreGetProductResponseDto;
 import com.example.productservice.models.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 //@Service
 //@Primary // In case of conflict this class's object will be used
@@ -25,10 +30,10 @@ public class ProductServiceFakeStoreImpl implements ProductService{
         requestBody.setImage(product.getImageUrl());
         requestBody.setDescription(product.getDescription());
         requestBody.setCategory(product.getCategory());
-        FakeStoreResponseDto response = restTemplate.postForObject(
+        FakeStoreCreateProductResponseDto response = restTemplate.postForObject(
                 "https://fakestoreapi.com/products",
                 requestBody,
-                FakeStoreResponseDto.class
+                FakeStoreCreateProductResponseDto.class
         );
         Product product1 = new Product();
         product1.setId(response.getId());
@@ -37,5 +42,25 @@ public class ProductServiceFakeStoreImpl implements ProductService{
         product1.setTitle(response.getTitle());
         product1.setDescription(response.getDescription());
         return product;
+    }
+
+    /*
+        List<FakeStoreGetProductResponseDto>.class does not work here because Java removes type during the
+        runtime for backward compatibility. Thus, Type will be removed during the runtime(Type erasure) & that
+        time Java does not know about the response type. It only knows that it is a List, Array, etc...
+     */
+    @Override
+    public List<Product> getAllProducts() {
+        FakeStoreGetProductResponseDto[] response = restTemplate.getForObject(
+                "https://fakestoreapi.com/products",
+                FakeStoreGetProductResponseDto[].class
+        );
+        List<FakeStoreGetProductResponseDto> responseDtoList = Stream.of(response).toList();
+
+        List<Product> products = new ArrayList<>();
+        for (FakeStoreGetProductResponseDto fakeStoreGetProductResponseDto: responseDtoList) {
+            products.add(fakeStoreGetProductResponseDto.toProduct());
+        }
+       return products;
     }
 }
