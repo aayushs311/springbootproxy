@@ -40,17 +40,18 @@ public class ProductServiceFakeStoreImpl implements ProductService{
      */
     @Override
     public List<Product> getAllProducts() {
-        FakeStoreGetProductResponseDto[] response = restTemplate.getForObject(
-                "https://fakestoreapi.com/products",
-                FakeStoreGetProductResponseDto[].class
-        );
-        List<FakeStoreGetProductResponseDto> responseDtoList = Stream.of(response).toList();
-
-        List<Product> products = new ArrayList<>();
-        for (FakeStoreGetProductResponseDto fakeStoreGetProductResponseDto: responseDtoList) {
-            products.add(fakeStoreGetProductResponseDto.toProduct());
-        }
-       return products;
+        throw new RuntimeException();
+//        FakeStoreGetProductResponseDto[] response = restTemplate.getForObject(
+//                "https://fakestoreapi.com/products",
+//                FakeStoreGetProductResponseDto[].class
+//        );
+//        List<FakeStoreGetProductResponseDto> responseDtoList = Stream.of(response).toList();
+//
+//        List<Product> products = new ArrayList<>();
+//        for (FakeStoreGetProductResponseDto fakeStoreGetProductResponseDto: responseDtoList) {
+//            products.add(fakeStoreGetProductResponseDto.toProduct());
+//        }
+//       return products;
     }
 
 //    @Override

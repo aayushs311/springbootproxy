@@ -52,5 +52,19 @@ public class ProductController {
         return "Product with ID: " + productId + " has been updated";
     }
 
+    /**
+     * Below is the way how we handle exception.
+     * The only disadvantage of handling exception this way is that it will only work at this particular
+       controller only.
+     * To handle exception at the top(global) level. We need to use Controller Advices
+     */
+    @ExceptionHandler(Exception.class)
+    public String handleException() {
+        return "Exception has been handled";
+    }
 
+    @ExceptionHandler(RuntimeException.class)
+    public String handleRuntimeException() {
+        return "RuntimeException has been handled";
+    }
 }
