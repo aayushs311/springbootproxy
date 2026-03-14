@@ -1,5 +1,6 @@
 package com.example.productservice.service;
 
+import com.example.productservice.dtos.CreateProductRequestDto;
 import com.example.productservice.dtos.FakeStoreCreateProductRequestDto;
 import com.example.productservice.dtos.FakeStoreCreateProductResponseDto;
 import com.example.productservice.dtos.FakeStoreGetProductResponseDto;
@@ -24,24 +25,12 @@ public class ProductServiceFakeStoreImpl implements ProductService{
 
     @Override
     public Product createProduct(Product product) {
-        FakeStoreCreateProductRequestDto requestBody = new FakeStoreCreateProductRequestDto();
-        requestBody.setTitle(product.getTitle());
-        requestBody.setPrice(product.getPrice());
-        requestBody.setImage(product.getImageUrl());
-        requestBody.setDescription(product.getDescription());
-        requestBody.setCategory(product.getCategory());
         FakeStoreCreateProductResponseDto response = restTemplate.postForObject(
                 "https://fakestoreapi.com/products",
-                requestBody,
+                FakeStoreCreateProductRequestDto.fromProduct(product),
                 FakeStoreCreateProductResponseDto.class
         );
-        Product product1 = new Product();
-        product1.setId(response.getId());
-        product1.setPrice(response.getPrice());
-        product1.setImageUrl(response.getImage());
-        product1.setTitle(response.getTitle());
-        product1.setDescription(response.getDescription());
-        return product;
+        return response.toProduct();
     }
 
     /*
@@ -62,5 +51,22 @@ public class ProductServiceFakeStoreImpl implements ProductService{
             products.add(fakeStoreGetProductResponseDto.toProduct());
         }
        return products;
+    }
+
+//    @Override
+//    public Product updateProduct(long productId, Product product) {
+//        FakeStoreCreateProductResponseDto response = restTemplate.patchForObject(
+//                "https://fakestoreapi.com/products" + productId,
+//                FakeStoreCreateProductRequestDto.fromProduct(product),
+//                FakeStoreCreateProductResponseDto.class
+//        );
+//        return response.toProduct();
+//    }
+
+    public void updateProduct(long productId, Product product) {
+        restTemplate.put(
+                "https://fakestoreapi.com/products/" + productId,
+                FakeStoreCreateProductRequestDto.fromProduct(product)
+        );
     }
 }

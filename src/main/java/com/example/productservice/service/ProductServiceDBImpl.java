@@ -1,5 +1,6 @@
 package com.example.productservice.service;
 
+import com.example.productservice.dtos.CreateProductRequestDto;
 import com.example.productservice.models.Product;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +17,9 @@ public class ProductServiceDBImpl implements ProductService{
     @Override
     public List<Product> getAllProducts() {
         return List.of();
+    }
+
+    @Override
+    public void updateProduct(long productId, Product product) {
     }
 }

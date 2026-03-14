@@ -14,7 +14,7 @@ public class GetProductResponseDto {
     private String imageUrl;
     private String category;
 
-    public static GetProductResponseDto from(Product product) {
+    public static GetProductResponseDto fromProduct(Product product) {
         GetProductResponseDto getProductResponseDto = new GetProductResponseDto();
 
         getProductResponseDto.setId(product.getId());

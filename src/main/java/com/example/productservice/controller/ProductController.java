@@ -3,6 +3,7 @@ package com.example.productservice.controller;
 import com.example.productservice.dtos.CreateProductRequestDto;
 import com.example.productservice.dtos.CreateProductResponseDto;
 import com.example.productservice.dtos.GetProductResponseDto;
+import com.example.productservice.dtos.UpdateProductResponseDto;
 import com.example.productservice.models.Product;
 import com.example.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,13 +33,24 @@ public class ProductController {
         List<Product> products = productService.getAllProducts();
         List<GetProductResponseDto> getProductResponseDtos = new ArrayList<>();
         for(Product product: products) {
-            getProductResponseDtos.add(GetProductResponseDto.from(product));
+            getProductResponseDtos.add(GetProductResponseDto.fromProduct(product));
         }
         return getProductResponseDtos;
     }
 
-    @PatchMapping("/{id}")
-    public void updateProduct(@PathVariable("id") long id) {
+//    @PatchMapping("/{id}")
+//    public UpdateProductResponseDto updateProduct(@PathVariable("id") long productId, @RequestBody CreateProductRequestDto createProductRequestDto) {
+//        Product product = productService.updateProduct(productId, createProductRequestDto.toProduct());
+//        UpdateProductResponseDto updateProductResponseDto = new UpdateProductResponseDto();
+//        updateProductResponseDto.setProduct(CreateProductResponseDto.fromProduct(product));
+//        return updateProductResponseDto;
+//    }
 
+    @PutMapping("/{id}")
+    public String updateProduct(@PathVariable("id") long productId, @RequestBody CreateProductRequestDto createProductRequestDto) {
+        productService.updateProduct(productId, createProductRequestDto.toProduct());
+        return "Product with ID: " + productId + " has been updated";
     }
+
+
 }
