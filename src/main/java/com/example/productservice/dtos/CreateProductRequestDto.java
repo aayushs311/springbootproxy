@@ -12,16 +12,18 @@ public class CreateProductRequestDto {
     private String description;
     private double price;
     private String imageUrl;
-    private String category;
+    private String categoryName;
 
     public Product toProduct() {
         Product product = new Product();
+
         product.setTitle(this.title);
         product.setDescription(this.description);
         product.setPrice(this.price);
         product.setImageUrl(this.imageUrl);
-        Category category1 = new Category();
-        product.setCategory(category1);
+        Category category = new Category();
+        category.setName(categoryName);
+        product.setCategory(category);
 
         return product;
     }

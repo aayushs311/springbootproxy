@@ -1,9 +1,12 @@
 package com.example.productservice.advices;
 
+import com.example.productservice.dtos.ErrorResponseDto;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 
 @ControllerAdvice
+@RestController
 public class ExceptionAdvices {
     @ExceptionHandler(Exception.class)
     public String handleException() {
@@ -11,7 +14,11 @@ public class ExceptionAdvices {
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public String handleRuntimeException() {
-        return "RuntimeException has been handled";
+    public ErrorResponseDto handleRuntimeException(RuntimeException e) {
+
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto();
+        errorResponseDto.setStatus("ERROR");
+        errorResponseDto.setMessage(e.getMessage());
+        return errorResponseDto;
     }
 }
