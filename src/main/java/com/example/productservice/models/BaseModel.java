@@ -2,6 +2,8 @@ package com.example.productservice.models;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -13,6 +15,8 @@ import java.util.Date;
 
     @Id is used to make it Primary key
  */
+@Getter
+@Setter
 @MappedSuperclass
 public class BaseModel {
     @Id

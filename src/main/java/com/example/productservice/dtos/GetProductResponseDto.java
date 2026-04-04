@@ -19,7 +19,7 @@ public class GetProductResponseDto {
 
         getProductResponseDto.setId(product.getId());
         getProductResponseDto.setTitle(product.getTitle());
-        getProductResponseDto.setCategory(product.getCategory());
+        getProductResponseDto.setCategory(String.valueOf(product.getCategory()));
         getProductResponseDto.setPrice(product.getPrice());
         getProductResponseDto.setImageUrl(product.getImageUrl());
         getProductResponseDto.setDescription(product.getDescription());
