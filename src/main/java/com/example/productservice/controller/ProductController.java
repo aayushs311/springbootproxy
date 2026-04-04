@@ -58,13 +58,13 @@ public class ProductController {
        controller only.
      * To handle exception at the top(global) level. We need to use Controller Advices
      */
-    @ExceptionHandler(Exception.class)
-    public String handleException() {
-        return "Exception has been handled";
-    }
-
-    @ExceptionHandler(RuntimeException.class)
-    public String handleRuntimeException() {
-        return "RuntimeException has been handled";
-    }
+//    @ExceptionHandler(Exception.class)
+//    public String handleException() {
+//        return "Exception has been handled";
+//    }
+//
+//    @ExceptionHandler(RuntimeException.class)
+//    public String handleRuntimeException() {
+//        return "RuntimeException has been handled";
+//    }
 }
