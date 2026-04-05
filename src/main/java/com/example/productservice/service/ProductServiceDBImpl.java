@@ -75,7 +75,11 @@ public class ProductServiceDBImpl implements ProductService{
         if(category.isEmpty()) {
             Category toSaveCategory = new Category();
             toSaveCategory.setName(categoryName);
-            toBePutInProduct = categoryRepository.save(toSaveCategory);
+            /*
+                In case of Cascade, we don't need to save category explicitly, JPA does it automatically.
+             */
+//            toBePutInProduct = categoryRepository.save(toSaveCategory);
+            toBePutInProduct = toSaveCategory;
         } else {
             toBePutInProduct = category.get();
         }
