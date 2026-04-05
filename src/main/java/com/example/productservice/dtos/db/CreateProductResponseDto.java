@@ -1,6 +1,5 @@
-package com.example.productservice.dtos;
+package com.example.productservice.dtos.db;
 
-import com.example.productservice.models.Category;
 import com.example.productservice.models.Product;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +10,7 @@ public class CreateProductResponseDto {
     private long id;
     private String title;
     private String description;
-    private double price;
+    private Double price;
     private String imageUrl;
     private String category;
 

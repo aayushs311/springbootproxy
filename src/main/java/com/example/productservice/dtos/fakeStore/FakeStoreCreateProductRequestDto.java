@@ -1,6 +1,5 @@
-package com.example.productservice.dtos;
+package com.example.productservice.dtos.fakeStore;
 
-import com.example.productservice.models.Category;
 import com.example.productservice.models.Product;
 import lombok.Getter;
 import lombok.Setter;

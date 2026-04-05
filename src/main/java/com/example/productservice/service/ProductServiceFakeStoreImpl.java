@@ -1,9 +1,8 @@
 package com.example.productservice.service;
 
-import com.example.productservice.dtos.CreateProductRequestDto;
-import com.example.productservice.dtos.FakeStoreCreateProductRequestDto;
-import com.example.productservice.dtos.FakeStoreCreateProductResponseDto;
-import com.example.productservice.dtos.FakeStoreGetProductResponseDto;
+import com.example.productservice.dtos.fakeStore.FakeStoreCreateProductRequestDto;
+import com.example.productservice.dtos.fakeStore.FakeStoreCreateProductResponseDto;
+import com.example.productservice.dtos.fakeStore.FakeStoreGetProductResponseDto;
 import com.example.productservice.models.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -69,5 +68,10 @@ public class ProductServiceFakeStoreImpl implements ProductService{
                 "https://fakestoreapi.com/products/" + productId,
                 FakeStoreCreateProductRequestDto.fromProduct(product)
         );
+    }
+
+    @Override
+    public Product updatePartialProduct(long productId, Product product) {
+        return null;
     }
 }

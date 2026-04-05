@@ -1,4 +1,4 @@
-package com.example.productservice.dtos;
+package com.example.productservice.dtos.db;
 
 import com.example.productservice.models.Product;
 import lombok.Getter;
@@ -10,7 +10,7 @@ public class GetProductResponseDto {
     private long id;
     private String title;
     private String description;
-    private double price;
+    private Double price;
     private String imageUrl;
     private String category;
 
@@ -19,7 +19,7 @@ public class GetProductResponseDto {
 
         getProductResponseDto.setId(product.getId());
         getProductResponseDto.setTitle(product.getTitle());
-        getProductResponseDto.setCategory(String.valueOf(product.getCategory()));
+        getProductResponseDto.setCategory(product.getCategory().getName());
         getProductResponseDto.setPrice(product.getPrice());
         getProductResponseDto.setImageUrl(product.getImageUrl());
         getProductResponseDto.setDescription(product.getDescription());

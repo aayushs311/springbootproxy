@@ -1,4 +1,4 @@
-package com.example.productservice.dtos;
+package com.example.productservice.dtos.db;
 
 import com.example.productservice.models.Category;
 import com.example.productservice.models.Product;
@@ -10,7 +10,7 @@ import lombok.Setter;
 public class CreateProductRequestDto {
     private String title;
     private String description;
-    private double price;
+    private Double price;
     private String imageUrl;
     private String categoryName;
 

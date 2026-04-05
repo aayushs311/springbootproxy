@@ -1,9 +1,9 @@
 package com.example.productservice.controller;
 
-import com.example.productservice.dtos.CreateProductRequestDto;
-import com.example.productservice.dtos.CreateProductResponseDto;
-import com.example.productservice.dtos.GetProductResponseDto;
-import com.example.productservice.dtos.UpdateProductResponseDto;
+import com.example.productservice.dtos.db.CreateProductRequestDto;
+import com.example.productservice.dtos.db.CreateProductResponseDto;
+import com.example.productservice.dtos.db.GetProductResponseDto;
+import com.example.productservice.exceptions.ProductNotFoundException;
 import com.example.productservice.models.Product;
 import com.example.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,21 +38,22 @@ public class ProductController {
         return getProductResponseDtos;
     }
 
-//    @PatchMapping("/{id}")
-//    public UpdateProductResponseDto updateProduct(@PathVariable("id") long productId, @RequestBody CreateProductRequestDto createProductRequestDto) {
-//        Product product = productService.updateProduct(productId, createProductRequestDto.toProduct());
-//        UpdateProductResponseDto updateProductResponseDto = new UpdateProductResponseDto();
-//        updateProductResponseDto.setProduct(CreateProductResponseDto.fromProduct(product));
-//        return updateProductResponseDto;
-//    }
-
-    @PutMapping("/{id}")
-    public String updateProduct(@PathVariable("id") long productId, @RequestBody CreateProductRequestDto createProductRequestDto) {
-        productService.updateProduct(productId, createProductRequestDto.toProduct());
-        return "Product with ID: " + productId + " has been updated";
+    @PatchMapping("/{id}")
+    public CreateProductResponseDto updateProduct(
+            @PathVariable("id") long productId,
+            @RequestBody CreateProductRequestDto createProductRequestDto
+    ) throws ProductNotFoundException {
+        Product product = productService.updatePartialProduct(productId, createProductRequestDto.toProduct());
+        return CreateProductResponseDto.fromProduct(product);
     }
 
-    /**
+//    @PutMapping("/{id}")
+//    public String updateProduct(@PathVariable("id") long productId, @RequestBody CreateProductRequestDto createProductRequestDto) {
+//        productService.updateProduct(productId, createProductRequestDto.toProduct());
+//        return "Product with ID: " + productId + " has been updated";
+//    }
+
+    /*
      * Below is the way how we handle exception.
      * The only disadvantage of handling exception this way is that it will only work at this particular
        controller only.
