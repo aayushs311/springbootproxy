@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @Entity
 public class Category extends BaseModel {
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, name = "category_name")
     private String name;
     @Basic(fetch = FetchType.LAZY)
     private String description;
@@ -29,4 +29,5 @@ public class Category extends BaseModel {
 
     @OneToOne
     private Subcategory subcategories;
+    private int countOfProducts;
 }
